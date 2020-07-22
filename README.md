@@ -13,7 +13,7 @@
 * opengl 3.3
 * SDL2
 * stb_image
-
+* spdlog
 
 # 开始
 推荐使用 Visual Studio 2019，本游戏主要发布在windos平台。

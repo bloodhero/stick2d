@@ -32,6 +32,7 @@ IncludeDir["stb"]   = "Engine/vendor/stb"
 IncludeDir["SDL2"] = "Engine/vendor/SDL2-2.0.12/include"
 IncludeDir["ffmpeg"]   = "Engine/vendor/ffmpeg-4.3-win64-dev/include"
 IncludeDir["openal"]   = "Engine/vendor/openal-soft-1.20.1-bin/include"
+IncludeDir["spdlog"]   = "Engine/vendor/spdlog/include"
 
 LibDir = {}
 LibDir["SDL2"]       = "Engine/vendor/SDL2-2.0.12/lib/x64"
@@ -75,7 +76,8 @@ project "Engine"
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb}",
-		"%{IncludeDir.openal}"
+		"%{IncludeDir.openal}",
+		"%{IncludeDir.spdlog}"
 	}
 
 	-- 附加库目录
@@ -135,7 +137,8 @@ project "Sandbox"
 		"%{prj.name}/src",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.Nuklear}",
-		"%{IncludeDir.imgui}"
+		"%{IncludeDir.imgui}",
+		"%{IncludeDir.spdlog}"
 	}
 
 	links

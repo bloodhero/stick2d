@@ -16,3 +16,6 @@
 [submodule "Engine/vendor/stb"]
 	path = Engine/vendor/stb
 	url = https://github.com/nothings/stb.git
+[submodule "Engine/vendor/spdlog"]
+	path = Engine/vendor/spdlog
+	url = https://github.com/gabime/spdlog.git

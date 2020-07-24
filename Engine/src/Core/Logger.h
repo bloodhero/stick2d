@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SDL.h>
+
 #include <spdlog/spdlog.h>
 #include <memory>
 
@@ -8,27 +10,42 @@ namespace stick2d {
     class Logger
     {
     public:
-        static void Init();
-
-        static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
-        static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
+        void enableLog();
+        void disableLog();
     private:
-        static std::shared_ptr<spdlog::logger> s_CoreLogger;
-        static std::shared_ptr<spdlog::logger> s_ClientLogger;
+        Logger();
+        ~Logger();
+
+        friend Logger* theLogger();
     };
 
 }
 
-// Core log macros
-#define LOG_CORE_TRACE(...)    ::stick2d::Logger::GetCoreLogger()->trace(__VA_ARGS__)
-#define LOG_CORE_INFO(...)     ::stick2d::Logger::GetCoreLogger()->info(__VA_ARGS__)
-#define LOG_CORE_WARN(...)     ::stick2d::Logger::GetCoreLogger()->warn(__VA_ARGS__)
-#define LOG_CORE_ERROR(...)    ::stick2d::Logger::GetCoreLogger()->error(__VA_ARGS__)
-#define LOG_CORE_CRITICAL(...) ::stick2d::Logger::GetCoreLogger()->critical(__VA_ARGS__)
+// General log macros
+#define LOG_TRACE(...)    spdlog::trace(__VA_ARGS__)
+#define LOG_INFO(...)     spdlog::info(__VA_ARGS__)
+#define LOG_WARN(...)     spdlog::warn(__VA_ARGS__)
+#define LOG_ERROR(...)    spdlog::error(__VA_ARGS__)
+#define LOG_CRITICAL(...) spdlog::critical(__VA_ARGS__)
 
-// Client log macros
-#define LOG_TRACE(...)         ::stick2d::Logger::GetClientLogger()->trace(__VA_ARGS__)
-#define LOG_INFO(...)          ::stick2d::Logger::GetClientLogger()->info(__VA_ARGS__)
-#define LOG_WARN(...)          ::stick2d::Logger::GetClientLogger()->warn(__VA_ARGS__)
-#define LOG_ERROR(...)         ::stick2d::Logger::GetClientLogger()->error(__VA_ARGS__)
-#define LOG_CRITICAL(...)      ::stick2d::Logger::GetClientLogger()->critical(__VA_ARGS__)
+// Renderer log macros
+#define LOG_RENDERER_TRACE(...)    spdlog::trace("[renderer] " __VA_ARGS__)
+#define LOG_RENDERER_INFO(...)     spdlog::info("[renderer] " __VA_ARGS__)
+#define LOG_RENDERER_WARN(...)     spdlog::warn("[renderer] " __VA_ARGS__)
+#define LOG_RENDERER_ERROR(...)    spdlog::error("[renderer] " __VA_ARGS__)
+#define LOG_RENDERER_CRITICAL(...) spdlog::critical("[renderer] " __VA_ARGS__)
+
+// Audio log macros
+#define LOG_AUDIO_TRACE(...)    spdlog::trace("[audio] " __VA_ARGS__)
+#define LOG_AUDIO_INFO(...)     spdlog::info("[audio] " __VA_ARGS__)
+#define LOG_AUDIO_WARN(...)     spdlog::warn("[audio] " __VA_ARGS__)
+#define LOG_AUDIO_ERROR(...)    spdlog::error("[audio] " __VA_ARGS__)
+#define LOG_AUDIO_CRITICAL(...) spdlog::critical("[audio] " __VA_ARGS__)
+
+#ifdef _DEBUG
+#define DEBUGBREAK()         __debugbreak()
+#define ASSERT(x, ...) { if(!(x)) { LOG_ERROR(__VA_ARGS__); DEBUGBREAK(); } }
+#else
+#define DEBUGBREAK()
+#define ASSERT(x, ...)
+#endif

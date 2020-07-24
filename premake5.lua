@@ -135,9 +135,12 @@ project "Sandbox"
 	{
 		"Engine/src",
 		"%{prj.name}/src",
+		"%{IncludeDir.SDL2}",
+		"%{IncludeDir.json}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.Nuklear}",
 		"%{IncludeDir.imgui}",
+		"%{IncludeDir.glm}",
 		"%{IncludeDir.spdlog}"
 	}
 

@@ -6,6 +6,8 @@ namespace stick2d {
     class Director;
     class Application;
     class Window;
+    class Audio;
+    class MixChunk;
 
     class Director
     {
@@ -23,12 +25,14 @@ namespace stick2d {
         void setFullScreen(bool fullScreen);
         void clearScreen();
         void updateScreen();
+        void playSFX(MixChunk* sfx);
+        void playMUS(MixChunk* mus, bool loop);
 
     private:
         Director();
-        ~Director();
+        ~Director() = default;
         Application* m_app;
-        Window* m_window;
+        Audio* m_audio;
     };
 
     extern Director* theDirector();

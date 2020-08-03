@@ -4,13 +4,13 @@
 
 namespace stick2d {
 
-    void MyBootstrap::configApp(AppConfiguration* config)
+    void MyBootstrap::configApp(app_configuration* config)
     {
         config->isFullscreen = false;
-        config->isResizable = false;
+        config->isResizable = true;
         config->windowTitle = "Sandbox";
         config->windowIconFilename = "";
-        config->resolution = { (20 * 18)*2 , (20 * 12)*2 };
+        config->resolution = { 1280, 720};
     }
 
     Scene* MyBootstrap::firstScene()

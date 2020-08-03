@@ -1,7 +1,5 @@
 #pragma once
 
-#include <SDL.h>
-
 #include <spdlog/spdlog.h>
 #include <memory>
 
@@ -10,13 +8,11 @@ namespace stick2d {
     class Logger
     {
     public:
-        void enableLog();
-        void disableLog();
-    private:
         Logger();
         ~Logger();
 
-        friend Logger* theLogger();
+        void enableLog();
+        void disableLog();
     };
 
 }

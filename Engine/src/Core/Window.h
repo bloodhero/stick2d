@@ -10,13 +10,13 @@
 
 namespace stick2d {
 
-	struct WindowProps
+	struct window_props
 	{
 		std::string title = "STICK2D ENGINE";
 		std::string icon = "";
 		glm::ivec2 resolution = { 1280, 720 };
 		bool isFullscreen = false;
-		bool isResizable = true;
+		bool isResizable = false;
 		bool isVsync = true;
 	};
 
@@ -24,10 +24,13 @@ namespace stick2d {
 	class Window
 	{
 	public:
+		Window();
+		~Window();
+
 		void onUpdate();
 
-		SDL_Window* getWindowHandler() { return m_window; }
-		SDL_GLContext* getGlContext() { return &m_gl_context; }
+		SDL_Window* getNativeWindow() { return m_window; }
+		SDL_GLContext* getGLContext() { return &m_gl_context; }
 		int getWidth() { return m_props.resolution.x; }
 		int getHeight() { return m_props.resolution.y; }
 		bool isVSync() { return m_props.isVsync; }
@@ -45,15 +48,9 @@ namespace stick2d {
 		void updateScreen();
 
 	private:
-		Window();
-		~Window();
 
 		SDL_Window* m_window;
-		WindowProps m_props;
+		window_props m_props;
 		SDL_GLContext m_gl_context;
-
-		friend Window* theWindow();
 	};
-
-	extern Window* theWindow();
 }

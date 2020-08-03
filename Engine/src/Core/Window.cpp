@@ -14,6 +14,7 @@ namespace stick2d
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+        SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
         m_window = SDL_CreateWindow(m_props.title.c_str(),
             SDL_WINDOWPOS_CENTERED,
@@ -120,9 +121,13 @@ namespace stick2d
 
                 SDL_SetWindowSize(m_window, resolution.x, resolution.y);
                 SDL_SetWindowPosition(m_window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
-
-                LOG_TRACE("Window resized to {}x{}", resolution.x, resolution.y);
             }
+
+            int x = 0;
+            int y = 0;
+            SDL_GetWindowSize(m_window, &x, &y);
+
+            LOG_TRACE("Window resized to {}x{}", x, y);
     }
 
     void Window::setWindowIcon(std::string_view icon_filename)
@@ -149,13 +154,6 @@ namespace stick2d
     void Window::updateScreen()
     {
         SDL_GL_SwapWindow(m_window);
-    }
-
-
-    Window* theWindow()
-    {
-        static Window instance;
-        return &instance;
     }
 
 }

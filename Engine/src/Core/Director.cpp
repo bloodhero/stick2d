@@ -7,25 +7,14 @@
 #include "Core/LayerStack.h"
 #include "Core/Application.h"
 #include "Core/Window.h"
+#include "Audio/Audio.h"
 
 namespace stick2d {
-    Director::Director()
-        :m_app(theApplication()),
-        m_window(theWindow())
+    Director::Director():
+        m_app(theApplication()),
+        m_audio(new Audio())
     {
 
-    }
-
-
-    Director::~Director()
-    {
-
-    }
-
-    Director* theDirector()
-    {
-        static Director instance;
-        return &instance;
     }
 
     void Director::runWithScene(Scene* scene)
@@ -70,22 +59,37 @@ namespace stick2d {
 
     void Director::setResolution(int width, int height)
     {
-        m_window->setResolution({ width, height });
+        m_app->m_window->setResolution({ width, height });
     }
 
     void Director::setFullScreen(bool fullScreen)
     {
-        m_window->setFullscreen(fullScreen);
+        m_app->m_window->setFullscreen(fullScreen);
     }
 
     void Director::clearScreen()
     {
-        m_window->clearScreen();
+        m_app->m_window->clearScreen();
     }
 
     void Director::updateScreen()
     {
-        m_window->updateScreen();
+        m_app->m_window->updateScreen();
     }
 
+    void Director::playSFX(MixChunk* sfx)
+    {
+        m_audio->playSFX(sfx);
+    }
+
+    void Director::playMUS(MixChunk* mus, bool loop)
+    {
+        m_audio->playMUS(mus, loop);
+    }
+
+    Director* theDirector()
+    {
+        static Director instance;
+        return &instance;
+    }
 }

@@ -9,7 +9,8 @@ namespace stick2d {
 	class ImGuiManager
 	{
 	public:
-		friend ImGuiManager* theImGuiManager();
+		ImGuiManager() = default;
+		~ImGuiManager() = default;
 
 		void onAttach();
 		void onDetach();
@@ -19,10 +20,6 @@ namespace stick2d {
 		void onEvent(Event& e);
 
 	private:
-		ImGuiManager() = default;
-		~ImGuiManager() = default;
 		bool m_block_events = true;
 	};
-
-	extern ImGuiManager* theImGuiManager();
 }

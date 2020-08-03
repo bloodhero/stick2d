@@ -52,11 +52,4 @@ namespace stick2d {
         spdlog::set_default_logger(spdlog::get("null_logger"));
     }
 
-
-    Logger* theLogger()
-    {
-        static Logger instance;
-        return &instance;
-    }
-
 }

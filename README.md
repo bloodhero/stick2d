@@ -31,6 +31,7 @@
 
 # 命名规范
 - 类名 每个单词首字母大写，不包含下划线 MyEvent
+- 结构体名 一律小写, 单词之间用下划线连接. app_configuration
 - 函数命名 驼峰模式， 首字母小写 onClose
 - 结构体成员变量 同函数命名 mouseButton
 - 局部变量 一律小写, 单词之间用下划线连接. mouse_button

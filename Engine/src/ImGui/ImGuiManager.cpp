@@ -1,7 +1,8 @@
 #include "pch.h"
 
 #include "ImGui/ImGuiManager.h"
-#include "Core/Window.h"
+#include "Core/Application.h"
+#include "Core/Logger.h"
 
 #include <imgui.h>
 #include <examples/imgui_impl_sdl.h>
@@ -20,7 +21,7 @@ namespace stick2d {
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
         //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
-        io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
+        //io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
         //io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
         //io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 
@@ -39,7 +40,7 @@ namespace stick2d {
 
 
         // Setup Platform/Renderer bindings
-        ImGui_ImplSDL2_InitForOpenGL(theWindow()->getWindowHandler(),theWindow()->getGlContext());
+        ImGui_ImplSDL2_InitForOpenGL(theApplication()->getNativeWindow(),theApplication()->getGLContext());
         ImGui_ImplOpenGL3_Init("#version 330");
 
         // Load Fonts
@@ -75,7 +76,7 @@ namespace stick2d {
     {
         // Start the Dear ImGui frame
         ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplSDL2_NewFrame(theWindow()->getWindowHandler());
+        ImGui_ImplSDL2_NewFrame(theApplication()->getNativeWindow());
         ImGui::NewFrame();
     }
 
@@ -83,7 +84,7 @@ namespace stick2d {
     void ImGuiManager::end()
     {
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2((float)theWindow()->getWidth(), (float)theWindow()->getHeight());
+        io.DisplaySize = ImVec2((float)theApplication()->getWidth(), (float)theApplication()->getHeight());
 
         // Rendering
         ImGui::Render();
@@ -106,11 +107,4 @@ namespace stick2d {
     {
         ImGui_ImplSDL2_ProcessEvent(&e.event);
     }
-
-    extern ImGuiManager* theImGuiManager()
-    {
-        static ImGuiManager instance;
-        return &instance;
-    }
-
 }
